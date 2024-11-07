@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ETickets.Models.Cart>  
+
+@{
+    ViewData["Title"] = "All Orders";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Movie</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Movie.Name</td>  <!-- Movie Name -->
+                    <td>@item.Movie.Price.ToString("c")</td>  <!-- Movie Price -->
+                    <td>@item.Count</td>  <!-- Quantity -->
+                    <td>@((item.Movie.Price * @item.Count).ToString("C"))</td>  <!-- Total Price -->
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h4>Total Price: @Model.Sum(e => e.Movie.Price * e.Count).ToString("c")</h4>
+}
+else
+{
+    <p>No orders found.</p>
+}

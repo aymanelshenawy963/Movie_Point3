@@ -131,6 +131,13 @@ namespace ETickets.Controllers
             return Redirect(session.Url);
         }
 
+  
+        public IActionResult AllOrder()
+        {
+            var cartProduct = cartRepository.GetAll([e => e.Movie]).ToList();
+            return View(cartProduct.ToList());
+
+        }
 
 
 
